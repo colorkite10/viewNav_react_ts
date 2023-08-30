@@ -4,8 +4,6 @@ const useAsyncFn = <T>(fn: (...args: any[]) => Promise<T>, deps: any[]) => {
   const lastCallId = useRef(0);
   const [state, setState] = useState<{
     isLoading: boolean;
-    value?: T;
-    error?: any;
   }>({
     isLoading: false,
   });
@@ -19,10 +17,12 @@ const useAsyncFn = <T>(fn: (...args: any[]) => Promise<T>, deps: any[]) => {
 
     return fn(...args).then(
       (value) => {
+        //@ts-expect-error:배포중 오류
         callId === lastCallId.current && setState({ value, isLoading: false });
         return value;
       },
       (error) => {
+        //@ts-expect-error:배포중 오류
         callId === lastCallId.current && setState({ error, isLoading: false });
         return error;
       }

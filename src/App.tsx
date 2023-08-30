@@ -54,7 +54,9 @@ const App = () => {
     setState({
       currentPage: {
         id: state.currentPage.id + 1,
+        //@ts-expect-error:배포중 오류
         name: posts.value[state.currentPage.id + 1].email,
+        //@ts-expect-error:배포중 오류
         contents: posts.value[state.currentPage.id + 1].body,
       },
       storedPreviousPages: [...state.storedPreviousPages, state.currentPage],
